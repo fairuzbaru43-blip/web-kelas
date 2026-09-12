@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Website resmi papan kelas X RPL 1 SMKN Takeran. Informasi jadwal pelajaran, jadwal piket, pengumuman mading digital, galeri kegiatan, dan struktur organisasi kelas.">
+<title>Kelas X RPL 1 — Papan Kelas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="login-screen" id="loginScreen" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
+  <form class="login-card" id="loginForm">
+    <span class="login-mark">X·1</span>
+    <p class="login-kicker">VALHALLA SOCIETY</p>
+    <h1 id="loginTitle">Masuk ke papan kelas</h1>
+    <p class="login-description" id="loginDesc">Selamat datang di papan kelas X RPL 1. Halaman ini dapat diakses oleh semua pengunjung.</p>
+    
+    <!-- Bagian Pilihan Peran (Default Terlihat) -->
+    <div class="role-selection-group" id="roleSelectionGroup">
+      <button class="student-login-submit" id="studentLoginBtn" type="button">Masuk sebagai Siswa</button>
+      <div class="divider-text">atau</div>
+      <button class="admin-toggle-button" id="adminToggleBtn" type="button">Masuk sebagai Admin</button>
+    </div>
+
+    <!-- Bagian Form Admin (Default Tersembunyi) -->
+    <div class="admin-credentials-group" id="adminCredentialsGroup" hidden>
+      <label for="loginUsername">Nama pengguna admin</label>
+      <input id="loginUsername" name="username" type="text" autocomplete="username">
+      <label for="loginPassword">Kata sandi</label>
+      <div class="password-field">
+        <input id="loginPassword" name="password" type="password" autocomplete="current-password">
+        <button class="password-toggle" id="passwordToggle" type="button" aria-label="Perlihatkan kata sandi" aria-pressed="false">Lihat</button>
+      </div>
+      <p class="login-error" id="loginError" role="alert" aria-live="polite"></p>
+      <button class="login-submit" type="submit">Masuk sebagai Admin</button>
+      <button class="admin-back-button" id="adminBackButton" type="button">Kembali</button>
+    </div>
+
+  </form>
+</div>
+
+<div id="siteContent" hidden>
+
+<header class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="#beranda" class="brand">
+      <span class="brand-mark">X·1</span>
+      <span class="brand-name">Kelas X RPL 1</span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Buka menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav-links" id="navLinks">
+      <a href="#beranda" class="nav-link active">Beranda</a>
+      <a href="#kelas-kita" class="nav-link">Kelas Kita</a>
+      <a href="#jadwal" class="nav-link">Jadwal</a>
+      <a href="#piket" class="nav-link">Piket</a>
+      <a href="#pengumuman" class="nav-link">Pengumuman</a>
+      <a href="#galeri" class="nav-link">Foto Acara</a>
+      <a href="#anggota" class="nav-link">Anggota</a>
+      <a href="#pengelola" class="nav-link">Pengelola</a>
+      <a href="#kontak" class="nav-link">Instagram</a>
+      <div class="nav-controls">
+        <span class="admin-badge" id="adminBadge" hidden>Mode Admin</span>
+        <button class="theme-switch" id="themeToggle" type="button" aria-label="Ganti mode layar" title="Ganti Mode Tampilan">
+          <svg class="theme-icon-moon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+          <svg class="theme-icon-sun" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <span class="theme-text" id="themeText">Mode Malam</span>
+        </button>
+        <button class="logout-button" id="logoutButton" type="button">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+            <polyline points="16 17 21 12 16 7"></polyline>
+            <line x1="21" y1="12" x2="9" y2="12"></line>
+          </svg>
+          <span>Keluar</span>
+        </button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<section class="admin-panel" id="adminPanel" hidden aria-labelledby="adminPanelTitle">
+  <div class="admin-panel-inner">
+    <div class="admin-header">
+      <h2 id="adminPanelTitle">Dashboard Pengelola</h2>
+      <span class="admin-status-pill">Sesi Aktif</span>
+    </div>
+    <div class="admin-editor-grid">
+      <div class="admin-editor-block">
+        <h3>Pengumuman</h3>
+        <div id="adminAnnouncementList"></div>
+        <form class="admin-new-form" id="newAnnouncementForm">
+          <h4>Tambah pengumuman</h4>
+          <input name="date" type="text" placeholder="Tanggal, contoh: 14 Agu 2026" required>
+          <input name="title" type="text" placeholder="Judul pengumuman" required>
+          <textarea name="body" placeholder="Isi pengumuman" required></textarea>
+          <div class="admin-form-buttons">
+            <button class="admin-btn-submit" type="submit">Tambah pengumuman</button>
+          </div>
+        </form>
+      </div>
+      <div class="admin-editor-block">
+        <h3>Galeri kelas</h3>
+        <div id="adminGalleryList"></div>
+        <form class="admin-new-form" id="newGalleryForm">
+          <h4>Tambah galeri</h4>
+          <input name="caption" type="text" placeholder="Keterangan foto" required>
+          <input name="image" type="url" placeholder="URL gambar (opsional)">
+          <div class="admin-gallery-fields">
+            <input name="emoji" type="text" placeholder="Emoji, contoh: 📸" maxlength="4">
+            <input name="color" type="color" value="#7fa8a3" aria-label="Warna latar galeri">
+          </div>
+          <div class="admin-form-buttons">
+            <button class="admin-btn-submit" type="submit">Tambah galeri</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero" id="beranda">
+  <div class="chalk-dust"></div>
+  <div class="hero-inner">
+    <p class="hero-eyebrow">SMKN TAKERAN · Tahun Ajaran 2026/2027</p>
+    <h1 class="hero-title">
+      Selamat datang di<br>
+      <span class="hero-highlight">papan tulis</span> Kelas X RPL 1
+    </h1>
+    <svg class="chalk-underline" viewBox="0 0 420 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M4 14C60 4 120 20 180 10C240 0 300 18 360 8C380 5 400 10 416 6" stroke="#F2C14E" stroke-width="4" stroke-linecap="round"/>
+    </svg>
+    <p class="hero-sub">Semua yang perlu diketahui anak X RPL 1 ada di sini: cerita kelas, jadwal pelajaran, pengumuman wali kelas, sampai dokumentasi kegiatan. Dicoret, ditempel, dan diperbarui setiap minggu.</p>
+    <div class="hero-actions">
+      <a href="#jadwal" class="btn btn-primary">Lihat jadwal hari ini</a>
+      <a href="#kelas-kita" class="btn btn-ghost">Kenali kelas kita</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-num" id="statSiswa">35</span>
+        <span class="stat-label">siswa</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">14</span>
+        <span class="stat-label">mapel</span>
+      </div>
+    </div>
+  </div>
+  <div class="board-edge"></div>
+</section>
+
+<main>
+<section class="section section-alt" id="kelas-kita">
+  <div class="section-inner">
+    <p class="section-eyebrow">01 &mdash; Cerita Kami</p>
+    <h2 class="section-title">Tentang Kelas Kita</h2>
+    <p class="section-desc">X RPL 1 adalah ruang belajar, berkarya, dan bertumbuh bersama untuk menjadi talenta digital yang kreatif dan berkarakter.</p>
+
+    <div class="about-grid">
+      <article class="about-story">
+        <span class="about-kicker">X RPL 1 &middot; 2026/2027</span>
+        <p class="about-nickname">VALHALLA SOCIETY</p>
+        <h3>Belajar teknologi, tumbuh sebagai satu tim.</h3>
+        <p>Di kelas ini kami mengeksplorasi pemrograman, desain, dan pengembangan perangkat lunak sambil saling membantu dalam setiap proses belajar.</p>
+      </article>
+      <div class="about-highlights">
+        <div class="about-highlight"><span class="about-number">35</span><span>Siswa aktif belajar dan berkarya<small>33 laki-laki &middot; 2 perempuan</small></span></div>
+        <div class="about-highlight"><span class="about-number">14</span><span>Mata pelajaran dalam perjalanan kami</span></div>
+        <div class="about-highlight"><span class="about-number">RPL</span><span>Rekayasa Perangkat Lunak</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="jadwal">
+  <div class="section-inner">
+    <p class="section-eyebrow">02 — Papan Waktu</p>
+    <h2 class="section-title">Jadwal Pelajaran</h2>
+    <p class="section-desc">Pilih hari untuk melihat mata pelajaran, jam, dan pengajar. Jam pelajaran yang sedang berlangsung otomatis ditandai.</p>
+
+    <div class="day-tabs" id="dayTabs">
+      <button class="day-tab active" data-day="senin">Senin</button>
+      <button class="day-tab" data-day="selasa">Selasa</button>
+      <button class="day-tab" data-day="rabu">Rabu</button>
+      <button class="day-tab" data-day="kamis">Kamis</button>
+      <button class="day-tab" data-day="jumat">Jumat</button>
+    </div>
+
+    <div class="schedule-card">
+      <table class="schedule-table">
+        <thead>
+          <tr><th>Jam</th><th>Mata Pelajaran</th><th>Pengajar</th><th>Ruangan</th></tr>
+        </thead>
+        <tbody id="scheduleBody">
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="piket">
+  <div class="section-inner">
+    <p class="section-eyebrow">03 &mdash; Tugas Bersama</p>
+    <h2 class="section-title">Jadwal Piket Kelas</h2>
+    <p class="section-desc">Mari jaga kelas tetap bersih, rapi, dan nyaman. Pilih hari untuk melihat petugas piket.</p>
+    <div class="day-tabs" id="dutyTabs">
+      <button class="day-tab active" data-duty-day="senin">Senin</button>
+      <button class="day-tab" data-duty-day="selasa">Selasa</button>
+      <button class="day-tab" data-duty-day="rabu">Rabu</button>
+      <button class="day-tab" data-duty-day="kamis">Kamis</button>
+      <button class="day-tab" data-duty-day="jumat">Jumat</button>
+    </div>
+    <div class="duty-card">
+      <div class="duty-heading">
+        <div class="duty-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--chalk-yellow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m19 11-8-8-8.6 8.6a2 2 0 0 0 0 2.8l5.2 5.2a2 2 0 0 0 2.8 0L19 11Z"/>
+            <path d="m5 2 5 5"/>
+            <path d="M2 22h20"/>
+          </svg>
+        </div>
+        <div>
+          <h3 id="dutyDayTitle">Piket Hari Senin</h3>
+          <p>Datang lebih awal dan pastikan kelas siap untuk belajar.</p>
+        </div>
+      </div>
+      <div class="duty-members" id="dutyMembers"></div>
+      <p class="duty-note"><strong>Tugas piket:</strong> menyapu, merapikan meja, menghapus papan tulis, membuang sampah, mengambil MBG dan mengembalikan.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="pengumuman">
+  <div class="section-inner">
+    <p class="section-eyebrow">03 — Mading Digital</p>
+    <h2 class="section-title">Pengumuman</h2>
+    <p class="section-desc">Info terbaru dari wali kelas, OSIS, dan pengurus kelas — ditempel di sini.</p>
+
+    <div class="corkboard" id="corkboard">
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="galeri">
+  <div class="section-inner">
+    <p class="section-eyebrow">04 — Foto Acara</p>
+    <h2 class="section-title">Foto Acara-Acara</h2>
+    <p class="section-desc">Dokumentasi kegiatan VALHALLA SOCIETY, dari praktikum, turnamen, hingga perayaan sekolah.</p>
+
+    <div class="gallery-grid" id="galleryGrid">
+    </div>
+  </div>
+</section>
+
+<section class="section" id="anggota">
+  <div class="section-inner">
+    <p class="section-eyebrow">05 — Struktur Kelas</p>
+    <h2 class="section-title">Anggota &amp; Pengurus</h2>
+    <p class="section-desc">Kenalan sama pengurus kelas dan wali kelas X RPL 1.</p>
+
+    <div class="member-grid" id="memberGrid">
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="pengelola">
+  <div class="section-inner">
+    <p class="section-eyebrow">06 — Di Balik Website</p>
+    <h2 class="section-title">Pengelola Website</h2>
+    <p class="section-desc">Website VALHALLA SOCIETY ini dikelola secara khusus oleh pengembang website kelas.</p>
+
+    <div class="website-managers">
+      <article class="website-manager">
+        <span class="manager-label">Dikelola oleh</span>
+        <h3>Indra Yudhistira</h3>
+        <p class="manager-nickname">Nama panggilan: <strong>Yuraa.</strong></p>
+        <p>Web Developer &amp; Administrator Website Kelas</p>
+      </article>
+
+      <article class="website-manager">
+        <span class="manager-label">Didesain oleh</span>
+        <h3>Fairus Hafiyudin Ramadhani</h3>
+        <p class="manager-nickname">Nama panggilan: <strong>Fairuz</strong></p>
+        <p>Desainer Web</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="kontak">
+  <div class="section-inner">
+    <p class="section-eyebrow">07 — Media Sosial</p>
+    <h2 class="section-title">Instagram Kelas</h2>
+    <p class="section-desc">Ikuti kegiatan, dokumentasi, dan informasi terbaru X RPL 1 melalui Instagram.</p>
+    
+    <a class="instagram-card" href="https://www.instagram.com/amazon.erpelsaa_?utm_source=ig_web_button_share_sheet&stkn=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer">
+      <span class="instagram-icon" aria-hidden="true">◎</span>
+      <span><strong>@amazon.erpelsaa_</strong><small>Buka akun Instagram kelas</small></span>
+      <span class="instagram-arrow" aria-hidden="true">↗</span>
+    </a>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <p>Website ini dikelola oleh pengembang website VALHALLA SOCIETY</p>
+  <button class="to-top" id="toTop" aria-label="Kembali ke atas">↑ Kembali ke atas</button>
+</footer>
+</div>
+
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Tutup">✕</button>
+  <div class="lightbox-content">
+    <div class="lightbox-photo" id="lightboxPhoto"></div>
+    <p class="lightbox-caption" id="lightboxCaption"></p>
+  </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
