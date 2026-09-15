@@ -108,12 +108,12 @@ function escapeHtml(value) {
 
 const MEMBERS = [
   { name: "Kurniawan Rojali, S.Pd", role: "Wali Kelas", initials: "KR" },
-  { name: "Arka Pradana", role: "Ketua Kelas", initials: "AP" },
-  { name: "Sekar Ayuningtyas", role: "Wakil Ketua", initials: "SA" },
-  { name: "Bilqis Nur Fadila", role: "Sekretaris 1", initials: "BN" },
+  { name: "Jniko", role: "Ketua Kelas", initials: "AP" },
+  { name: "Fridilan", role: "Wakil Ketua", initials: "SA" },
+  { name: "Amdri Haryo", role: "Sekretaris 1", initials: "BN" },
   { name: "Zahra Almira", role: "Sekretaris 2", initials: "ZA" },
-  { name: "Daffa Rizqullah", role: "Bendahara 1", initials: "DR" },
-  { name: "Nayla Putri", role: "Bendahara 2", initials: "NP" },
+  { name: "Anastasya", role: "Bendahara 1", initials: "DR" },
+  { name: "Alya", role: "Bendahara 2", initials: "NP" },
 ];
 
 const navToggle = document.getElementById("navToggle");
